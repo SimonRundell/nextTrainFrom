@@ -208,6 +208,15 @@ export const ScotRailLogo = ({ size = "2em", className = "operator-logo", alt = 
   />
 );
 
+export const ThamesLinkLogo = ({ size = "2em", className = "operator-logo", alt = "Thameslink" }) => (
+  <img 
+    src="/images/TL.jpg"
+    alt={alt}
+    className={className}
+    style={{ height: size, width: 'auto' }}
+
+  />
+);
 // Emoji-based icons
 export const TrainIcon = ({ size = "1em", className = "" }) => (
   <span className={className} style={{ fontSize: size }}>🚂</span>
@@ -344,6 +353,8 @@ export const getOperatorIcon = (operatorCode, size = "1em", className = "") => {
       return <TransPennineLogo size={size} className={className} />; // TransPennine Express with actual logo
     case 'SR':
       return <ScotRailLogo size={size} className={className} />; // ScotRail with actual logo
+    case 'TL':
+      return <ThamesLinkLogo size={size} className={className} />; // Thameslink with actual logo
     default:
       return <OperatorIcon size={size} className={className} />;
   }
@@ -355,6 +366,27 @@ export const Icons = {
   BritishRailLogo,
   GreatWesternLogo,
   CrossCountryLogo,
+  SouthWesternLogo,
+  HeathrowExpressLogo,
+  GatwickExpressLogo,
+  TfLLogo,
+  SouthernLogo,
+  SouthEasternLogo,
+  AvantiWCLogo,
+  WestMidlandsLogo,
+  OvergroundLogo,
+  LNERLogo,
+  GreatNorthernLogo,
+  GrandCentralLogo,
+  HullTrainsLogo,
+  GreaterAngliaLogo,
+  ChilternRailwaysLogo,
+  NorthernLogo,
+  TfWLogo,
+  EastMidlandsLogo,
+  TransPennineLogo,
+  ScotRailLogo,
+  ThamesLinkLogo,
   // Emoji-based icons
   Train: TrainIcon,
   Station: StationIcon,

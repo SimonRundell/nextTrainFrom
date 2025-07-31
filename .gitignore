@@ -25,4 +25,4 @@ dist-ssr
 
 
 # Ignore config file with sensitive data
-/.config.json
+.config.json
