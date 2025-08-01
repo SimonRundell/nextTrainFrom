@@ -740,3 +740,23 @@ LOADING AND TITLE ANIMATIONS
   font-size: 0.8rem;
   font-style: italic;
 }
+
+/* No trains message */
+.no-trains-message {
+  text-align: center;
+  padding: 2rem;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.no-trains-message p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.no-trains-message p:first-child {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}

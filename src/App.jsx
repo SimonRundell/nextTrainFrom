@@ -4,14 +4,16 @@ import useTrainData from './data.jsx';
 import TrainDetails from './trainDetails.jsx';
 import { InfoIcon, getStatusIcon, getOperatorIcon, BritishRailLogo } from './icons.jsx';
 import SearchStations from './searchStations.jsx';
+import SearchCallingAt from './callingAt.jsx';
 import CMFloatAd from './cmFloatAd.jsx';
 
 
 function App() {
   
   const [stationCode, setStationCode] = useState(''); // Default station code
+  const [callingAtCode, setCallingAtCode] = useState(''); // Default calling at code
   const [selectedTrain, setSelectedTrain] = useState(null); // Track which train is selected
-  const { data, loading, error } = useTrainData(stationCode);
+  const { data, loading, error } = useTrainData(stationCode, callingAtCode);
 
   // Helper to format date as dd/mm/yyyy
   function formatDate(dateStr) {
@@ -34,6 +36,7 @@ function App() {
         </header>
         <div className="searchbox">
           <SearchStations setStationCode={setStationCode}/>
+          <SearchCallingAt setCallingAtCode={setCallingAtCode} />
         </div>
         
         {loading && <div className="spinner"></div>}
@@ -43,9 +46,17 @@ function App() {
             <h3>
               {data.station_name} ({data.station_code}) as of {formatDate(data.date)} {data.time_of_day}
             </h3>
-            <div className="train-list">
-            <ul>
-              {data.departures.all.map((train, index) => (
+            {data.departures.all.length === 0 ? (
+              <div className="no-trains-message">
+                <p>No trains found matching your search criteria.</p>
+                {callingAtCode && (
+                  <p>Try removing the "calling at" filter or selecting a different station.</p>
+                )}
+              </div>
+            ) : (
+              <div className="train-list">
+                <ul>
+                  {data.departures.all.map((train, index) => (
                 <div key={index}>
                   <li 
                     style={{'--item-index': index}}
@@ -72,7 +83,8 @@ function App() {
                 </div>
               ))}
             </ul>
-          </div>
+              </div>
+            )}
           </div>
         )}
         <CMFloatAd color='#ffffff' />
