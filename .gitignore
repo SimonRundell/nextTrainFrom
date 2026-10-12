@@ -26,6 +26,8 @@ dist-ssr
 
 # Ignore config file with sensitive data
 .config.json
+api/cache/*.json
+api/cache/*.tmp
 
 # Claude Code local settings
 .claude/

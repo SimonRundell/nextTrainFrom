@@ -3,7 +3,7 @@
  *
  * Rendered below a selected train row in the departure list.  Animates in
  * on mount via a CSS class toggle and displays journey, timing, and platform
- * information sourced from the TransportAPI departure object.
+ * information sourced from the normalised departure object.
  *
  * @module TrainDetails
  * @license CC BY-NC-SA 4.0 https://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -27,8 +27,9 @@ import {
  * delay triggers the CSS transition so the card slides in smoothly.
  *
  * @param {Object} props
- * @param {Object} props.train - Departure object from `data.departures.all`,
- *   augmented with an `index` property used for keying by the parent.
+ * @param {Object} props.train - Departure object from `data.departures.all`
+ *   (normalised server-side from the Darwin LDBSVWS response), augmented
+ *   with an `index` property used for keying by the parent.
  * @returns {JSX.Element}
  */
 function TrainDetails({ train }) {

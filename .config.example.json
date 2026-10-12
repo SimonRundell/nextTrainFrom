@@ -1,0 +1,9 @@
+{
+  "darwin": {
+    "apiKey": "REPLACE_WITH_API_KEY",
+    "endpoint": "https://api1.raildata.org.uk/1010-live-departure-board---staff-version1_0/LDBSVWS/api/20220120"
+  },
+  "cacheSeconds": 30,
+  "allowedOrigins": ["https://ntf.codemonkey.design"],
+  "devApiBase": "http://localhost/api"
+}

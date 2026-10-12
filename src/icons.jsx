@@ -3,12 +3,12 @@
  *
  * Exports two categories of icons:
  *  - **Image-based operator logos** – one per UK train operating company,
- *    identified by their two-letter TransportAPI operator code.
+ *    identified by their two-letter National Rail TOC code.
  *  - **Emoji-based utility icons** – lightweight inline icons for status,
  *    journey info, and UI affordances.
  *
  * Also exports two helper functions:
- *  - `getStatusIcon(status)` – maps a TransportAPI status string to an icon.
+ *  - `getStatusIcon(status)` – maps a status string to an icon.
  *  - `getOperatorIcon(operatorCode)` – maps a TOC code to its logo component.
  *
  * All logo components share the same prop signature: `{ size, className, alt }`.
@@ -201,7 +201,7 @@ export const StartsHereIcon = ({ size = '1em', className = '' }) => <span classN
 // ---------------------------------------------------------------------------
 
 /**
- * Return the appropriate status icon for a TransportAPI status string.
+ * Return the appropriate status icon for a departure status string.
  *
  * @param {string} status    - e.g. `'On time'`, `'Late'`, `'Cancelled'`.
  * @param {string} [size='1em']     - CSS font-size passed to the icon component.
@@ -219,7 +219,7 @@ export const getStatusIcon = (status, size = '1em', className = '') => {
 };
 
 /**
- * Return the operator logo component for a two-letter TransportAPI TOC code.
+ * Return the operator logo component for a two-letter National Rail TOC code.
  * Falls back to the generic `OperatorIcon` for unrecognised codes.
  *
  * @param {string} operatorCode  - Two-letter TOC code (e.g. `'GW'`, `'XC'`).

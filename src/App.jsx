@@ -34,7 +34,7 @@ function App() {
 
   /**
    * Format an ISO date string (YYYY-MM-DD) as DD/MM/YYYY for display.
-   * @param {string} dateStr - ISO date string from the TransportAPI response.
+   * @param {string} dateStr - ISO date string from the departures API response.
    * @returns {string} Formatted date, or empty string if input is falsy.
    */
   function formatDate(dateStr) {
