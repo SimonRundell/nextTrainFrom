@@ -1,10 +1,12 @@
 <?php
 /**
- * GET /api/departures.php?from=EXD[&callingAt=PLY]
+ * GET /api/departures.php?from=EXD[&callingAt=PLY][&force=1]
  *
  * Returns a TransportAPI-shaped departures envelope for any UK station,
  * optionally filtered to services calling at a second station, cached on
- * the server.
+ * the server. Pass force=1 to bypass a fresh cache entry and query Darwin
+ * directly (used for explicit refreshes); the cache is still written and
+ * still used as a fallback if the live request then fails.
  *
  * @license CC BY-NC-SA 4.0
  */
@@ -43,10 +45,12 @@ if ($callingAtRaw !== '') {
     }
 }
 
+$force = !empty($_GET['force']);
+
 $key = $from . ($callingAt !== null ? '_' . $callingAt : '');
 $entry = cacheRead($key);
 $age = cacheAge($entry);
-if ($entry !== null && $age < $config['cacheSeconds']) {
+if (!$force && $entry !== null && $age < $config['cacheSeconds']) {
     echo json_encode($entry['data']);
     exit();
 }

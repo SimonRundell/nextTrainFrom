@@ -196,6 +196,9 @@ export const CancelledIcon  = ({ size = '1em', className = '' }) => <span classN
 /** @param {{ size?: string, className?: string }} props */
 export const StartsHereIcon = ({ size = '1em', className = '' }) => <span className={className} style={{ fontSize: size }}>🚀</span>;
 
+/** @param {{ size?: string, className?: string }} props */
+export const RefreshIcon    = ({ size = '1em', className = '' }) => <span className={className} style={{ fontSize: size }}>🔄</span>;
+
 // ---------------------------------------------------------------------------
 // Helper functions
 // ---------------------------------------------------------------------------
@@ -273,7 +276,7 @@ export const Icons = {
   Warning: WarningIcon, Check: CheckIcon, Location: LocationIcon,
   Route: RouteIcon, Operator: OperatorIcon, ArrowRight: ArrowRightIcon,
   OnTime: OnTimeIcon, Early: EarlyIcon, Late: LateIcon,
-  Cancelled: CancelledIcon, StartsHere: StartsHereIcon,
+  Cancelled: CancelledIcon, StartsHere: StartsHereIcon, Refresh: RefreshIcon,
   getStatusIcon, getOperatorIcon,
 };
 

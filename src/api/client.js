@@ -27,11 +27,12 @@ export const http = axios.create({ baseURL: API_BASE.replace(/\/?$/, '/'), timeo
  * "calling at" station.
  * @param {string} from - CRS code of the departure station, e.g. `'EXD'`.
  * @param {string} [callingAt] - CRS code to filter to, or omit for all departures.
+ * @param {boolean} [force] - Bypass the server-side cache and query Darwin directly.
  * @returns {Promise<object>} The TransportAPI-shaped departures envelope.
  */
-export async function fetchDepartures(from, callingAt) {
+export async function fetchDepartures(from, callingAt, force) {
   const { data } = await http.get('departures.php', {
-    params: { from, ...(callingAt ? { callingAt } : {}) },
+    params: { from, ...(callingAt ? { callingAt } : {}), ...(force ? { force: 1 } : {}) },
   });
   return data;
 }

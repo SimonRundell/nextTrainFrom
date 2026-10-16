@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { MantineProvider } from '@mantine/core';
 import useTrainData from './data.js';
 import TrainDetails from './trainDetails.jsx';
-import { InfoIcon, getStatusIcon, getOperatorIcon, BritishRailLogo } from './icons.jsx';
+import { InfoIcon, RefreshIcon, getStatusIcon, getOperatorIcon, BritishRailLogo } from './icons.jsx';
 import StationSearch from './StationSearch.jsx';
 import CMFloatAd from './cmFloatAd.jsx';
 
@@ -30,7 +30,7 @@ function App() {
   const [stationCode, setStationCode] = useState('');
   const [callingAtCode, setCallingAtCode] = useState('');
   const [selectedTrain, setSelectedTrain] = useState(null);
-  const { data, loading, error } = useTrainData(stationCode, callingAtCode);
+  const { data, loading, error, refresh } = useTrainData(stationCode, callingAtCode);
 
   /**
    * Format an ISO date string (YYYY-MM-DD) as DD/MM/YYYY for display.
@@ -84,8 +84,19 @@ function App() {
 
         {data && (
           <div className="main-content">
-            <h3>
-              {data.station_name} ({data.station_code}) as of {formatDate(data.date)} {data.time_of_day}
+            <h3 className="station-heading">
+              <span>
+                {data.station_name} ({data.station_code}) as of {formatDate(data.date)} {data.time_of_day}
+              </span>
+              <button
+                type="button"
+                className={`refresh-btn ${loading ? 'spinning' : ''}`}
+                onClick={refresh}
+                disabled={loading}
+                aria-label="Refresh departures"
+              >
+                <RefreshIcon size="1.1em" />
+              </button>
             </h3>
 
             {data.departures.all.length === 0 ? (
@@ -97,7 +108,10 @@ function App() {
               </div>
             ) : (
               <div className="train-list">
-                <ul>
+                {/* Keying on the fetch timestamp remounts the list on every
+                    load (first search, new selection, or refresh), so the
+                    li cascade-in animation replays each time, not just once. */}
+                <ul key={`${data.station_code}_${data.date}_${data.time_of_day}`}>
                   {data.departures.all.map((train, index) => (
                     /* li wraps both the clickable row and the collapsible details panel,
                        keeping ul children valid (no div/section as direct ul children). */
